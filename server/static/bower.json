@@ -1,0 +1,32 @@
+{
+  "name": "mappingproject",
+  "version": "0.0.1",
+  "authors": [
+    "Luke Tully <luke@webrenos.com>"
+  ],
+  "description": "Computer Mapping Project",
+  "main": "index.html",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-animate": "1.2.16",
+    "angular-cookies": "1.2.16",
+    "angular-resource": "1.2.16",
+    "angular-mocks": "1.2.16",
+    "angular-route": "1.2.16",
+    "angular-scenario": "1.2.16",
+    "angular-touch": "1.2.16",
+    "angular-sanitize": "1.2.16",
+    "d3": "~3.4.13",
+    "json3": "~3.3.1",
+    "es5-shim": "~3.1.0",
+    "angular-ui-utils": "~0.1.1"
+  }
+}

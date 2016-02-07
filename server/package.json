@@ -1,0 +1,19 @@
+{
+  "name": "mapproject",
+  "version": "0.0.1",
+  "description": "Computer Mapping project",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.10.2",
+    "mysql": "^2.5.3",
+    "orm": "^2.1.20",
+    "express-decompress": "0.0.2",
+    "compression": "^1.2.1"
+  }
+}
