@@ -22,7 +22,9 @@ app.use( compress( {threshold: 1} ) );
 app.use("/computermapping", express.static( __dirname + '/static' ) );
 
 app.get( baseUrl, function ( req, res ) {
-  if ( parseInt(req.query.date) > 1949 && parseInt(req.query.date) < 2013 ) {
+res.set('Access-Control-Allow-Origin','*');
+ 
+ if ( parseInt(req.query.date) > 1949 && parseInt(req.query.date) < 2013 ) {
     var date = parseInt( req.query.date );
     if ( req.query.srcagency && req.query.type ) {
       connection.query( "SELECT * FROM fires WHERE YEAR_ = ? AND SRC_AGENCY = ? AND FIRE_TYPE = ?", [date, req.query.srcagency, req.query.type], function ( err, rows, fields ) {
@@ -53,6 +55,8 @@ app.get( baseUrl, function ( req, res ) {
     }
   } else {
 	res.send({errors: ["Please enter a valid date"]});
+
+
 }
 
 
