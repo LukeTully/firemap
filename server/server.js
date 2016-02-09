@@ -24,25 +24,28 @@ app.use("/computermapping", express.static(__dirname + '/static'));
 app.get(baseUrl, function (req, res) {
     res.set('Access-Control-Allow-Origin', '*');
 
-    if (parseInt(req.query.date) > 1949 && parseInt(req.query.date) < 2013) {
-        var date = parseInt(req.query.date);
+    // If a date is parsable
+    if (req.query.date) {
 
-        connection.query("SELECT * FROM fires WHERE YEAR_ = ?", [date], function (err, rows, fields) {
-            if (rows.length === 0) {
-                res.send({errors: ["Please enter a valid date"]});
-            } else if (req.query.srcagency) {
-                connection.query("SELECT * FROM fires WHERE YEAR_ = ? AND SRC_AGENCY = ?", [date, req.query.srcagency], function (
-                    err,
-                    rows,
-                    fields) {
+
+        if (parseInt(req.query.date) > 1949 && parseInt(req.query.date) < 2013) {
+            var date = parseInt(req.query.date);
+
+            connection.query("SELECT * FROM fires WHERE YEAR_ = ?", [date], function (err, rows, fields) {
+                if (rows.length === 0) {
+                    res.send({errors: ["Please enter a valid date"]});
+                } else {
                     res.send(JSON.stringify(rows));
-                });
-            }
-            res.send(JSON.stringify(rows));
-        });
+                }
+
+            });
 
 
+        }
     }
+
+
+
 
 });
 
