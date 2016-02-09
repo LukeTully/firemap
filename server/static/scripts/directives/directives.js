@@ -71,17 +71,6 @@ angular.module('mapprojectApp')
                             mapConfig.canvasLayer = L.canvas();
                         }
                         console.log("Cleared");
-
-                        if (mapConfig.currentLat) {
-                            mapConfig.map.setView(mapConfig.currentLat, mapConfig.currentLong);
-                        } else {
-                            if (data.length > 0) {
-                                if (data[0].LATITUDE && data[0].LONGITUDE) {
-                                    mapConfig.map.setView([data[0].LATITUDE, data[0].LONGITUDE], 5);
-                                }
-                            }
-                        }
-
                         aggregatePoint(data, mapConfig, aggregateCB);
 
 
