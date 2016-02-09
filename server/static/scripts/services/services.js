@@ -5,7 +5,6 @@ angular.module( 'mapprojectApp' ).service( "FireQuery", function ($http) {
   return function (){
     var date = 1950;
     var agency = '';
-    var fireType = '';
     this.getFires = function ( cb ) {
       this.domain = "http://obsessively.ca";
       this.apiString = "computermapping/fires";
@@ -19,15 +18,12 @@ angular.module( 'mapprojectApp' ).service( "FireQuery", function ($http) {
       if ( date && agency ) {
         this.fullUrl += "&srcagency=" + agency;
       }
-      if ( date && agency && fireType){
-        this.fullUrl += "&type=" + fireType;
-      }
       $http.get( this.fullUrl, {cache: true} )
         .success( function ( data, status, headers, config ) {
           cb( data );
         } )
         .error( function ( data, status, headers, config ) {
-          alert( "not success" );
+          console.log("Request failed");
         } );
     };
     this.setAgency = function (a){
@@ -58,7 +54,7 @@ angular.module( 'mapprojectApp' ).service( "FireQuery", function ($http) {
         var Fire = new FireQuery();
         Fire.setAgency(params.src);
         Fire.setDate(params.date);
-        Fire.setFireType(params.fireType);
+        //Fire.setFireType(params.fireType);
         //debugger;
         Fire.getFires( function ( data ) {
           cb( data );
@@ -82,41 +78,7 @@ angular.module( 'mapprojectApp' ).service( "FireQuery", function ($http) {
         {name: "Yukon", key: "YT"},
         {name: "PC-BA", key: "PC-BA"}
 
-      ],
-      fireTypes:
-        [
-          {
-            "FIRE_TYPE": "Ground"
-          },
-          {"FIRE_TYPE": ""},
-          {
-            "FIRE_TYPE": "Surface"
-          },
-          {
-            "FIRE_TYPE": "Crown"
-          },
-          {
-            "FIRE_TYPE": "Wildfire"
-          },
-          {
-            "FIRE_TYPE": "Mutual Aid"
-          },
-          {
-            "FIRE_TYPE": "Fire"
-          },
-          {
-            "FIRE_TYPE": "Nuisance"
-          },
-          {
-            "FIRE_TYPE": "Smoke Chase"
-          },
-          {
-            "FIRE_TYPE": "Unknown"
-          },
-          {
-            "FIRE_TYPE": "Test/Training"
-          }
-        ]
+      ]
     };
     return {
 
