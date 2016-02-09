@@ -125,45 +125,25 @@ function pushIntoPointSet(point, config, cb) {
             //						pointSet[i].addTo(map);
             L.geoJson(config.pointSet[i], {
                 pointToLayer: function (feature, latlng) {
+                    var intensity = parseInt(config.pointSet[i].intensity);
+                    var intensityRadius = intensity/2;
                     var markerOptions = {
                         stroke: false,
                         clickable: true,
                         fillOpacity: 1,
                         renderer: config.canvasLayer,
-                        radius: parseInt(config.pointSet[i].intensity)
+                        radius: intensityRadius,
+                        fillColor: "#671c03"
                     };
-//							console.log("cheese");
-                    var intensity = parseInt(config.pointSet[i].intensity);
-                    //TODO: Use if else statements
-                    if (intensity > 100) {
-                        markerOptions.fillColor = "#461302";
-//								markerOptions.radius = 2;
+                    // Colour options from lowest to highest hectares burned
 
-                    }
-                    else if (intensity > 4) {
-                        markerOptions.fillColor = "#671c03";
-//								markerOptions.radius = 1;
-                    }
-                    else if (intensity > 2) {
-                        markerOptions.fillColor = "#a92e05";
-//								markerOptions.radius = 0.5;
-                    }
-                    else if (intensity > 1) {
-                        markerOptions.fillColor = "#ec3f06";
-//								markerOptions.radius = 0.3;
-                    }
-                    else {
-                        markerOptions.fillColor = "#fa784d";
-//								markerOptions.radius = 0.1;
-                    }
 
-                    config.group.addLayer(new L.circle(latlng, parseInt(config.pointSet[i].intensity), markerOptions));
-//							group.addLayer(L.circle(markerOptions));
+
+
+                    config.group.addLayer(new L.circle(latlng, intensityRadius, markerOptions));
                     return L.circleMarker(latlng, markerOptions);
-//							return L.circle(new L.LatLng(latlng.lat,latlng.lng), 1)
                 }
             });
-//					console.log("Added a point to map");
 
         }
 
