@@ -8,7 +8,7 @@
  * Controller of the mapprojectApp
  */
 angular.module('mapprojectApp')
-    .controller('MainCtrl', function ($scope, FiresFact, StringsFact) {
+    .controller('MainCtrl', function ($scope, $timeout, FiresFact, StringsFact) {
 
         $scope.messages = {
             loading: false,
@@ -44,8 +44,20 @@ angular.module('mapprojectApp')
             src: $scope.globalStrings.provinces[0],
             date: 1973
         };
+        var currentTimeout = null;
+        $scope.debounceFires = function (params){
+            if (currentTimeout !== null) {
+                $timeout.cancel(currentTimeout);
+                currentTimeout = null;
+            }
+                currentTimeout = $timeout(function(){
+                    $scope.getFires(params);
+                }, 500);
 
+
+        };
         $scope.getFires = function (params) {
+
             $scope.messages.loading = true;
             $scope.messages.emptyDataset = false;
             $scope.messages.errors = null;
