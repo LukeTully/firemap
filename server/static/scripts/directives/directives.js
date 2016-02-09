@@ -22,8 +22,8 @@ angular.module('mapprojectApp')
                     currentLat: "",
                     currentLong: "",
                 };
-                scope.$watch(attrs.position, function (newVal,oldVal){
-                    if (newVal.latitude !== ""){
+                scope.$watch(attrs.position, function (newVal, oldVal) {
+                    if (newVal.latitude !== "") {
                         mapConfig.currentLat = newVal.latitude;
                         mapConfig.currentLong = newVal.longitude;
                         var latlng = L.latLng(mapConfig.currentLat, mapConfig.currentLong);
@@ -126,7 +126,7 @@ function pushIntoPointSet(point, config, cb) {
             L.geoJson(config.pointSet[i], {
                 pointToLayer: function (feature, latlng) {
                     var intensity = parseInt(config.pointSet[i].intensity);
-                    var intensityRadius = intensity/2;
+                    var intensityRadius = intensity / 2;
                     var markerOptions = {
                         stroke: false,
                         clickable: true,
@@ -136,8 +136,6 @@ function pushIntoPointSet(point, config, cb) {
                         fillColor: "#671c03"
                     };
                     // Colour options from lowest to highest hectares burned
-
-
 
 
                     config.group.addLayer(new L.circle(latlng, intensityRadius, markerOptions));
