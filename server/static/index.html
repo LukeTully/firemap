@@ -1,103 +1,80 @@
 <!doctype html>
 <html class="no-js">
 <head>
-  <meta charset="utf-8">
-  <title></title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width">
-  <link rel="stylesheet" href="styles/style.css"/>
-  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css"/>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="styles/style.css"/>
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css"/>
 
-  <script src="bower_components/es5-shim/es5-shim.js"></script>
-  <script src="bower_components/json3/lib/json3.min.js"></script>
+    <script src="bower_components/es5-shim/es5-shim.js"></script>
+    <script src="bower_components/json3/lib/json3.min.js"></script>
 
 
-  <script src="bower_components/angular/angular.js"></script>
-  <script src="bower_components/json3/lib/json3.js"></script>
-  <script src="bower_components/angular-resource/angular-resource.js"></script>
-  <script src="bower_components/angular-cookies/angular-cookies.js"></script>
-  <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-  <script src="bower_components/angular-animate/angular-animate.js"></script>
-  <script src="bower_components/angular-touch/angular-touch.js"></script>
-  <script src="bower_components/angular-route/angular-route.js">
-  </script>
-  <script src="bower_components/angular-ui-utils/ui-utils.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/json3/lib/json3.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/angular-route/angular-route.js">
+    </script>
+    <script src="bower_components/angular-ui-utils/ui-utils.js"></script>
 
-  <script src="scripts/app.js"></script>
-  <script src="scripts/controllers/main.js"></script>
-  <script src="scripts/controllers/about.js"></script>
-  <script src="scripts/services/services.js"></script>
-  <script src="scripts/directives/directives.js"></script>
-  <script src="scripts/leaflet-dev/leaflet-src.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/controllers/about.js"></script>
+    <script src="scripts/services/services.js"></script>
+    <script src="scripts/directives/directives.js"></script>
+    <script src="scripts/leaflet-dev/leaflet-src.js"></script>
 
 </head>
 <body ng-app="mapprojectApp">
-<!--[if lt IE 7]>
-<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
-  your browser</a> to improve your experience.</p>
-<![endif]-->
 <div id="container" ng-controller="MainCtrl">
-  <!--<h1 ng-if="messages.loading">Loading New Data</h1>-->
 
+    <div id="control-container" ng-class="{loading: messages.loading}" ng-init="getFires(fireConfig)">
+        <h1>Canadian National Fire Occurences from 1950 to 2012</h1>
 
-  <div id="control-container" ng-class="{loading: messages.loading}" ng-init="getFires(fireConfig)">
-    <h1>Canadian National Fire Occurences from 1950 to 2012</h1>
-    <div class="legend"><h3>Area Burned (Hectares)</h3>
-      <div class="legenditem"><div class="legendsquare one"></div><p class="legendlabel"> &gt; 20</p></div>
-      <div class="legenditem"><div class="legendsquare two"></div><p class="legendlabel"> &gt; 4</p></div>
-      <div class="legenditem"><div class="legendsquare three"></div><p class="legendlabel"> &gt; 2</p></div>
-      <div class="legenditem"><div class="legendsquare four"></div><p class="legendlabel"> &gt; 1</p></div>
-      <div class="legenditem"><div class="legendsquare five"></div><p class="legendlabel"> &lt; 1</p></div>
+        <form ng-submit="getFires(fireConfig)">
+            <input type="number" min="1950" max="2012" ng-model="fireConfig.date"
+                   ng-change="messages.emptyDataset = false; getFires(fireConfig)"/>
+
+            </select>
+            <button type="submit" class="submit">Submit</button>
+        </form>
+        <!--<h2 ng-if="fireData.length" class="results-count">{{fireData.length}} Fires found</h2>-->
+        <!--<div class="messages-container">-->
+        <!--<p ng-if="messages.emptyDataset">No forest fire records were found for {{fireConfig.date}}</p>-->
+        <!--<h3 ng-if="messages.errors" ng-repeat="error in messages.errors">{{error}}</h3>-->
+        <!--</div>-->
     </div>
-    <form ng-submit="getFires(fireConfig)">
-      <input type="number" min="1950" max="2012" ng-model="fireConfig.date"
-             ng-change="messages.emptyDataset = false; getFires(fireConfig)"/>
-      <select ng-model="fireConfig.src" ng-options="p.name for p in globalStrings.provinces"
-              ng-change="messages.emptyDataset = false; getFires(fireConfig)">
+    <lt-map coords="fireData" position="currentPos" id="map-container">
+        <div id="map"></div>
 
-      </select>
-      <button type="submit" class="submit">Submit</button>
-    </form>
-    <h2 ng-if="fireData.length" class="results-count">{{fireData.length}} Fires found</h2>
-    <div class="messages-container">
-      <p ng-if="messages.emptyDataset">No forest fire records were found for {{fireConfig.date}}</p>
-      <h3 ng-if="messages.errors" ng-repeat="error in messages.errors">{{error}}</h3>
-    </div>
-    <ul id="credits">
-      <li>Created By: Luke Tully</li>
-      <li>Data Sourced from: <a href="http://cwfis.cfs.nrcan.gc.ca/datamart">CWFIS Datamart</a></li>
-      <li>Open Source libraries and utilities used: <ul>
-        <li>Leaflet.js</li>
-        <li>Node.js</li>
-        <li>Angular.js</li>
-        <li>mysql module for Node.js</li>
-        <li>Express.js for Node.js</li>
-        <li>Bower package management by Twitter</li>
-      </ul>
-      <p>
-        {{currentPos}}
-      </p>
+    </lt-map>
 
-    </ul>
-  </div>
-  <lt-map coords="fireData" position="currentPos" id="map-container">
-    <div id="map"></div>
-
-  </lt-map>
-
-  <!--<div ng-repeat="fire in fireData">-->
-  <!--{{fire}}-->
-  <!--</div>-->
+    <!--<div ng-repeat="fire in fireData">-->
+    <!--{{fire}}-->
+    <!--</div>-->
 </div>
 
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-  ga('create', 'UA-57578830-1', 'auto');
-  ga('send', 'pageview');
+    ga('create', 'UA-57578830-1', 'auto');
+    ga('send', 'pageview');
 
 </script>
 </body>
