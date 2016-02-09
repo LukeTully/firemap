@@ -42,8 +42,7 @@ angular.module('mapprojectApp')
         // Can be moved to template
         $scope.fireConfig = {
             src: $scope.globalStrings.provinces[0],
-            date: 1973,
-            fireType: $scope.globalStrings.fireTypes[0]
+            date: 1973
         };
 
         $scope.getFires = function (params) {
@@ -53,8 +52,7 @@ angular.module('mapprojectApp')
             //console.log(params);
             var payload = {
                 src: params.src.key,
-                date: params.date,
-                fireType: params.fireType.FIRE_TYPE
+                date: params.date
             };
             console.log(payload);
             FiresFact.get(payload, function (data) {
