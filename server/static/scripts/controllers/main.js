@@ -9,7 +9,9 @@
  */
 angular.module('mapprojectApp')
     .controller('MainCtrl', function ($scope, $timeout, FiresFact, StringsFact) {
-
+        $scope.displayState = {
+          mastHead: true
+        };
         $scope.messages = {
             loading: false,
             errors: null

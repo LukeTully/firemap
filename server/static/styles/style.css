@@ -1,3 +1,16 @@
+@font-face {
+  font-family: 'libre_caslon_display';
+  src: url('../fonts/caslon/librecaslondisplay-regular-webfont.eot');
+  src: url('../fonts/caslon/librecaslondisplay-regular-webfont.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/caslon/librecaslondisplay-regular-webfont.woff2') format('woff2'),
+  url('../fonts/caslon/librecaslondisplay-regular-webfont.woff') format('woff'),
+  url('../fonts/caslon/librecaslondisplay-regular-webfont.ttf') format('truetype'),
+  url('../fonts/caslon/librecaslondisplay-regular-webfont.svg#libre_caslon_displayregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+
+}
+
 * {
   box-sizing: border-box;
 }
@@ -6,17 +19,23 @@ html, body {
   padding: 0;
 
 }
+body {
+  font-family: 'Libre Baskerville', Arial,sans-serif;
+}
 h1,h2,h3,h4,h5,h6 {
   padding:0;
   margin:0;
-  font-family: Helvetica, Arial,sans-serif;
+
 
 }
 h1 {
-  font-size: 2em;
+  font-size: 1.3rem;
+  line-height: 1.9rem;
+  font-weight: 700;
 }
 h2 {
-  font-size: 1.5em;
+  font-size: 1em;
+  font-weight: 400;
 }
 p {
   margin:0;
@@ -39,18 +58,39 @@ height:100%;
 
 }
 #control-container {
-  transition: background-color 0.2s ease-in-out;
-  background-color: #f5f5f5;
-  -webkit-flex: 0 0 20em;
-  -ms-flex: 0 0 20em;
-  flex: 0 0 20em;
-  -webkit-order: 1;
-  -ms-flex-order: 1;
-  order: 1;
-  padding-left:1em;
+width:100%;
+display:flex;
+  z-index: 9999999;
+}
+.date-large {
+  font-size: 2em;
+  text-align: center;
+  font-family: 'libre_caslon_display', Arial, sans-serif;
+  font-variant-numeric: oldstyle-nums;
+  -moz-font-feature-settings: "onum";
+  -webkit-font-feature-settings: "onum";
+  font-feature-settings: "onum";
+}
+#control-container .col {
+  flex: 1 1 auto;
+}
+
+#control-container .col-1 {
+  flex-basis: 20%;
+  text-align: center;
+}
+#control-container .col-1 .date-large{
+  float:left;
+  clear:both;
+  width:100%;
+  text-indent: 1em;
+}
+
+#control-container .col-2 {
+  flex-basis: 80%;
+  padding-left: 2em;
   padding-right: 2em;
-  padding-top: 1.5em;
-  overflow-x:auto;
+
 }
 
 #credits {
@@ -62,6 +102,28 @@ height:100%;
 #credits li {
   line-height: 1.5em;
 }
+#masthead {
+  position: absolute;
+  top:0;
+  left:0;
+  width:100%;
+  z-index: 999999;
+  background: #ffffff;
+  padding: 2em;
+}
+
+.toggle-parent {
+  margin-top: 1em;
+  float:left;
+}
+#control-container {
+  background-color:#fff !important;
+  position: absolute;
+  bottom: 0;
+  left:0;
+  height:5em;
+  padding-top: 1em;
+}
 #control-container input, #control-container select, #control-container button{
   float:left;
   clear:both;
@@ -70,27 +132,20 @@ height:100%;
   font-size: 1em;
 }
 #map-container {
-  -webkit-flex: 1 1 100%;
-  -ms-flex: 1 1 100%;
-  flex: 1 1 100%;
-  -webkit-order: 2;
-  -ms-flex-order: 2;
-  order: 2;
+  position: absolute;
+  top:0;
+  left:0;
+  width:100%;
   height:100%;
+  padding-bottom: 5em;
 }
 #container {
-  display:-webkit-flex;
-  display:-ms-flexbox;
-  display:flex;
-  -webkit-align-items: stretch;
-  -ms-flex-align: stretch;
-  align-items: stretch;
+  top:0;
+  left:0;
   position: absolute;
   height: 100%;
   width:100%;
-  -webkit-justify-content: flex-start;
-  -ms-flex-pack: start;
-  justify-content: flex-start;
+
 }
 
 
@@ -141,4 +196,3 @@ height:100%;
 .legendsquare.one {
   background-color:#671c03;
 }
-

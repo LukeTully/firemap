@@ -28,35 +28,30 @@
     <script src="scripts/services/services.js"></script>
     <script src="scripts/directives/directives.js"></script>
     <script src="scripts/leaflet-dev/leaflet-src.js"></script>
-
+    <link href='https://fonts.googleapis.com/css?family=Libre+Baskerville:400,700' rel='stylesheet' type='text/css'>
 </head>
 <body ng-app="mapprojectApp">
+<div id="masthead" ng-controller="MainCtrl" ng-show="displayState.mastHead">
+    <h1>Forest Fires in Canada</h1>
+    <h2>1950-2012</h2>
+    <a href="#" ng-click="displayState.mastHead = false;" class="toggle-parent">close</a>
+</div>
 <div id="container" ng-controller="MainCtrl">
-
     <div id="control-container" ng-class="{loading: messages.loading}" ng-init="getFires(fireConfig)">
-        <h1>Canadian National Fire Occurences from 1950 to 2012</h1>
+        <div class="col-1"><span class="date-large">{{fireConfig.date}}</span></div>
+        <div class="col-2">
+            <form ng-submit="getFires(fireConfig)">
 
-        <form ng-submit="getFires(fireConfig)">
-            {{fireConfig.date}}
-            <!--<input type="range" min="1950" max="2012" ng-model="fireConfig.date" ng-change="getFires(fireConfig)"/>-->
-            <!--<br/>-->
-            <input type="range" id="s1" min="1950" max="2012" ng-model="fireConfig.date" ng-change="debounceFires(fireConfig)">
+                <input type="range" id="s1" min="1950" max="2012" ng-model="fireConfig.date" ng-change="debounceFires(fireConfig)">
 
-        </form>
-        <!--<h2 ng-if="fireData.length" class="results-count">{{fireData.length}} Fires found</h2>-->
-        <!--<div class="messages-container">-->
-        <!--<p ng-if="messages.emptyDataset">No forest fire records were found for {{fireConfig.date}}</p>-->
-        <!--<h3 ng-if="messages.errors" ng-repeat="error in messages.errors">{{error}}</h3>-->
-        <!--</div>-->
+            </form>
+        </div>
+
     </div>
     <lt-map coords="fireData" position="currentPos" id="map-container">
         <div id="map"></div>
 
     </lt-map>
-
-    <!--<div ng-repeat="fire in fireData">-->
-    <!--{{fire}}-->
-    <!--</div>-->
 </div>
 <script>
     (function (i, s, o, g, r, a, m) {
