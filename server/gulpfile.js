@@ -43,7 +43,7 @@ gulp.task('transpile', () => {
         .pipe(gulp.dest(DISTPATHS.scripts))
         .pipe(liveReload());
 
-})
+});
 gulp.task('sass', function() {
     return gulp.src(RESOURCES.styles + '/**/*.scss')
         .pipe(sass().on('error', sass.logError))
