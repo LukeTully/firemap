@@ -9,12 +9,8 @@
  * Main module of the application.
  */
 angular
-  .module('mapprojectApp', [
-    'ngAnimate',
-    'ngCookies',
-    'ngResource',
-    'ngRoute',
-    'ngSanitize',
-    'ngTouch',
-    'ui.utils'
-  ]);
+    .module('mapprojectApp', [
+        'ngResource',
+        'ngRoute',
+        'ui.utils'
+    ]);
