@@ -1,30 +1,33 @@
 {
-  "name": "mapproject",
-  "version": "0.0.1",
-  "description": "Computer Mapping project",
-  "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "express": "^4.10.2",
-    "mysql": "^2.5.3",
-    "orm": "^2.1.20",
-    "express-decompress": "0.0.2",
-    "compression": "^1.2.1"
-  },
-  "devDependencies": {
-    "babel-preset-es2015": "^6.18.0",
-    "gulp": "^3.9.1",
-    "gulp-babel": "^6.1.2",
-    "gulp-concat": "^2.6.1",
-    "gulp-livereload": "^3.8.1",
-    "gulp-sass": "^2.3.2",
-    "gulp-sourcemaps": "^1.9.1",
-    "gulp-uglify": "^2.0.0",
-    "jscs": "^3.0.7"
-  }
+    "name": "mapproject",
+    "version": "0.0.1",
+    "description": "Computer Mapping project",
+    "main": "server.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node server.js"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.10.2",
+        "mysql": "^2.5.3",
+        "orm": "^2.1.20",
+        "express-decompress": "0.0.2",
+        "compression": "^1.2.1",
+        "babel-preset-es2015": "^6.18.0",
+        "eslint": "^3.12.0",
+        "eslint-config-airbnb": "^13.0.0",
+        "eslint-plugin-import": "^2.2.0",
+        "eslint-plugin-jsx-a11y": "^2.2.3",
+        "eslint-plugin-react": "^6.8.0",
+        "gulp": "^3.9.1",
+        "gulp-babel": "^6.1.2",
+        "gulp-concat": "^2.6.1",
+        "gulp-livereload": "^3.8.1",
+        "gulp-sass": "^2.3.2",
+        "gulp-sourcemaps": "^1.9.1",
+        "gulp-uglify": "^2.0.0"
+    },
+    "devDependencies": {}
 }
