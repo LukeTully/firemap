@@ -1,6 +1,0 @@
-// Place your settings in this file to overwrite the default settings
-{
-    "diffEditor.ignoreTrimWhitespace": true,
-    "jscs.disableIfNoConfig": true,
-    "editor.formatOnSave": false
-}
