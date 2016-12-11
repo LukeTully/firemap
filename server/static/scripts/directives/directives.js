@@ -23,7 +23,7 @@ angular.module('mapprojectApp')
 
         /* Watch the position attribute for changes and draw a dot on
         the map to represent the current location */
-        scope.$watch(attrs.position, (newVal) => {
+        scope.$watch('currentPos', (newVal) => {
           const lat = mapConfig.currentLat = newVal.latitude;
           const long = mapConfig.currentLong = newVal.longitude;
           const latLng = L.latLng(lat, long);
@@ -34,7 +34,6 @@ angular.module('mapprojectApp')
 
         scope.$watch('coordList', (newVal) => {
           let data = newVal;
-          if (newVal) {
             if (mapConfig.max) {
               data = data.splice(mapConfig.min, mapConfig.max);
             }
@@ -43,7 +42,6 @@ angular.module('mapprojectApp')
               mapConfig.canvasLayer = L.canvas();
             }
             aggregatePoint(data, mapConfig, aggregateCB);
-          }
         });
       },
     });
