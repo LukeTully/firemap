@@ -38,27 +38,6 @@ angular.module('mapprojectApp')
           console.log('Triggered');
           if (newVal) {
             console.log('Aggregating');
-                    // var geoProvs = L.geoJson(provinces, {
-                    // style: {
-                    // color: "#000000",
-                    // weight: 1,
-                    // fill: false
-                    // }
-                    // });
-
-                    // geoProvs.addTo(map);
-
-                    //
-                    // var markers = new L.marker,
-                    // potholePriority = [],
-                    // u = 0;
-
-                    // TODO: Loop and add markers here
-
-                    // Match priority value
-                    // var priorityRegex = /Priority (\d)/;
-                    // var holes = potholes.features[0].items;
-
 
             if (mapConfig.max) {
               data = data.splice(mapConfig.min, mapConfig.max);
