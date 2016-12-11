@@ -1,4 +1,4 @@
-'use strict';
+
 
 /**
  * @ngdoc overview
@@ -8,9 +8,8 @@
  *
  * Main module of the application.
  */
-angular
-    .module('mapprojectApp', [
-        'ngResource',
-        'ngRoute',
-        'ui.utils'
-    ]);
+angular.module('mapprojectApp', [
+  'ngResource',
+  'ngRoute',
+  'ui.utils',
+]);
