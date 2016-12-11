@@ -31,7 +31,7 @@ angular.module('mapprojectApp')
           mapConfig.map.setView(latLng);
         }, true);
 
-
+        /* Watch the coordinate list for changes and respond by redrawing the points on the map */
         scope.$watch('coordList', (newVal) => {
             /* Reset the canvas layer */
           if (mapConfig.group.getLayers()) {
