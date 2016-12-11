@@ -8,8 +8,6 @@ angular.module('mapprojectApp')
       link(scope, element, attrs) {
         const map = L.map('map').setView([51.106739, -114.913696], 4);
         L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {}).addTo(map);
-
-
         const mapConfig = {
           min: 0,
           max: null,
@@ -30,24 +28,16 @@ angular.module('mapprojectApp')
             mapConfig.map.setView(latlng);
           }
         }, true);
-
-
         scope.$watch('coordList', (newVal) => {
           let data = newVal;
-
-          console.log('Triggered');
           if (newVal) {
-            console.log('Aggregating');
-
             if (mapConfig.max) {
               data = data.splice(mapConfig.min, mapConfig.max);
             }
             if (mapConfig.group.getLayers()) {
-              console.log('has layers');
               mapConfig.map.removeLayer(mapConfig.canvasLayer);
               mapConfig.canvasLayer = L.canvas();
             }
-            console.log('Cleared');
             aggregatePoint(data, mapConfig, aggregateCB);
           }
         });
