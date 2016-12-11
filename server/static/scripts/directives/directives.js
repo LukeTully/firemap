@@ -33,15 +33,12 @@ angular.module('mapprojectApp')
 
 
         scope.$watch('coordList', (newVal) => {
-          let data = newVal;
-            if (mapConfig.max) {
-              data = data.splice(mapConfig.min, mapConfig.max);
-            }
-            if (mapConfig.group.getLayers()) {
-              mapConfig.map.removeLayer(mapConfig.canvasLayer);
-              mapConfig.canvasLayer = L.canvas();
-            }
-            aggregatePoint(data, mapConfig, aggregateCB);
+            /* Reset the canvas layer */
+          if (mapConfig.group.getLayers()) {
+            mapConfig.map.removeLayer(mapConfig.canvasLayer);
+            mapConfig.canvasLayer = L.canvas();
+          }
+          aggregatePoint(data, mapConfig, aggregateCB);
         });
       },
     });
