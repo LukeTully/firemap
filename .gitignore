@@ -51,3 +51,6 @@ bower_components
 
 # IntelliJ Hidden Directory
 .idea
+
+# VSCode config files
+.vscode
