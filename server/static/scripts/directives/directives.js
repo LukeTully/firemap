@@ -6,8 +6,6 @@ angular.module('mapprojectApp')
         currentPos: '=position',
       },
       link(scope, element, attrs) {
-        const map = L.map('map').setView([51.106739, -114.913696], 4);
-        L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {}).addTo(map);
         const mapConfig = {
           min: 0,
           max: null,
@@ -15,19 +13,25 @@ angular.module('mapprojectApp')
           canvasLayer: L.canvas(),
           pointSet: [],
           pointSetAlreadyAdded: [],
-          map,
           currentLat: '',
           currentLong: '',
         };
+
+        const map = L.map('map').setView([51.106739, -114.913696], 4);
+
+        L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {}).addTo(map);
+
+        /* Watch the position attribute for changes and draw a dot on
+        the map to represent the current location */
         scope.$watch(attrs.position, (newVal) => {
-          if (newVal.latitude !== '') {
-            mapConfig.currentLat = newVal.latitude;
-            mapConfig.currentLong = newVal.longitude;
-            const latlng = L.latLng(mapConfig.currentLat, mapConfig.currentLong);
-            L.circle(latlng, 200).addTo(mapConfig.map);
-            mapConfig.map.setView(latlng);
-          }
+          const lat = mapConfig.currentLat = newVal.latitude;
+          const long = mapConfig.currentLong = newVal.longitude;
+          const latLng = L.latLng(lat, long);
+          L.circle(latLng, 200).addTo(mapConfig.map);
+          mapConfig.map.setView(latLng);
         }, true);
+
+
         scope.$watch('coordList', (newVal) => {
           let data = newVal;
           if (newVal) {
