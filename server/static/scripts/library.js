@@ -1,13 +1,13 @@
 function aggregatePoints(dataList, renderer) {
    /* Transform each dataItem and throw it on the map */
   return dataList.map((item) => {
-    const mapItem = {
+     /* Transform each dataItem into a configured circleMarker */
+    return getCircleMarker({
       lat: item.LATITUDE,
       long: item.LONGITUDE,
       intensity: item.SIZE_HA,
       last: false,
-    };
-    return getCircleMarker(mapItem, renderer);
+    }, renderer);
   });
 }
 
