@@ -52,13 +52,12 @@ angular.module('mapprojectApp').service('FireQuery', ($http) => {
          const Fire = new FireQuery();
          Fire.setAgency(params.src);
          Fire.setDate(params.date);
-        // Fire.setFireType(params.fireType);
-        // debugger;
          Fire.getFires((data) => {
            cb(data);
          });
        },
-     })).factory('StringsFact', () => {
+     }))
+     .factory('StringsFact', () => {
        const strings = {
          provinces: [
         { name: 'Manitoba', key: 'MB' },
@@ -74,11 +73,9 @@ angular.module('mapprojectApp').service('FireQuery', ($http) => {
         { name: 'British Columbia', key: 'BC' },
         { name: 'Yukon', key: 'YT' },
         { name: 'PC-BA', key: 'PC-BA' },
-
          ],
        };
        return {
-
          getStrings() {
            return strings;
          },
