@@ -72,14 +72,7 @@ function isArray(arr) {
 
 function loopOverArrayForPoints(arr, config, cb) {
   for (let i = 0; i < arr.length; i++) {
-        // Set the current object for reference later
-        //				this.currentSet = arr[i];
-
-        // TODO: Write a more extensive test for this.
     if (parseInt(arr[i].LATITUDE) !== 0 && parseInt(arr[i].LONGITUDE) !== 0) {
-      if (i > 50000) {
-                //						console.log(i);
-      }
       if (i == arr.length - 1) {
         pushIntoPointSet({
           lat: arr[i].LATITUDE,
@@ -88,7 +81,6 @@ function loopOverArrayForPoints(arr, config, cb) {
           last: true,
         }, config, (group, config) => {
             config.map.addLayer(group);
-            console.log('Added Points to map');
           });
         cb(); // One of a few spots that doesn't need to be sent the config
       } else {
@@ -100,8 +92,6 @@ function loopOverArrayForPoints(arr, config, cb) {
         }, config);
       }
     } else {
-      console.log('Could not parse proper coords from this object:');
-      console.log(arr[i]);
       arr.splice(i, 1);
       i -= 2;
     }
