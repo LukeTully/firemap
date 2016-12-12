@@ -15,11 +15,11 @@ angular.module('mapprojectApp').service('FireQuery', ($http) => {
 
     /* Map configuration params to querystrings and values */
     Object.keys(defaultConfig).map((key) => {
-      if (currentConfig[key] !== null){
+      if (currentConfig[key] !== null) {
         this.fullUrl += `?${key}=${currentConfig[key]}`;
       }
     });
-    
+
     $http.get(this.fullUrl, { cache: true })
         .success((data, status, headers, requestConfig) => {
           cb(data);
@@ -75,12 +75,12 @@ angular.module('mapprojectApp').service('FireQuery', ($http) => {
         { name: 'Yukon', key: 'YT' },
         { name: 'PC-BA', key: 'PC-BA' },
 
-        ],
+         ],
        };
        return {
 
          getStrings() {
-          return strings;
-        },
+           return strings;
+         },
        };
      });
