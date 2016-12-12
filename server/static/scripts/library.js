@@ -30,8 +30,6 @@ function isArray(arr) {
   if (arr !== undefined && arr !== null) {
     if (arr.pop && typeof arr.pop === 'function') {
       return true;
-    } else {
-      return false;
     }
   }
 }
