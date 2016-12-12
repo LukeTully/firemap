@@ -54,18 +54,6 @@ function pushIntoPointSet(point, config, cb) {
   }
 }
 
-// :TODO Strip this callback out entirely
-function aggregateCB(cheese) {
-  if (isArray(cheese) && cheese.length !== 0) {
-        //				debugger;
-    console.log('Callback called');
-    console.time('Cheese');
-        //				var newTime = window.setTimeout(aggregatePoint, 1, cheese, aggregateCB);
-  } else {
-    console.log('Done');
-  }
-}
-
 function isArray(arr) {
   if (arr !== undefined && arr !== null) {
     if (arr.pop && typeof arr.pop === 'function') {
