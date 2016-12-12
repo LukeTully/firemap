@@ -1,27 +1,10 @@
-function aggregatePoint(dataList, config, cb) {
-  console.log(config);
-  console.timeEnd('Cheese');
-    // debugger;
-    // check if this is an array of arrays
-  if (isArray(dataList)) {
-    if (isArray(dataList[0])) {
-      console.log('Looping started');
-      loopOverArrayForPoints(dataList[0], config, (config) => {
-        console.log('Looping Ended');
-        dataList.splice(0, 1);
-        cb(dataList, config);
-      });
-    } else {
-      console.log('Looping started');
-      loopOverArrayForPoints(dataList, config, (config) => {
-        console.log('Looping Ended');
 
+
+
+function aggregatePoint(dataList, config, cb) {
+  loopOverArrayForPoints(dataList, config, () => {
         cb(dataList, config);
       });
-    }
-  } else {
-    throw 'datalist was not an array';
-  }
 }
 
 function pushIntoPointSet(point, config, cb) {
