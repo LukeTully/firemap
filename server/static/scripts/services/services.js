@@ -2,22 +2,24 @@
  * Created by Luke on 11-22-2014.
  */
 angular.module('mapprojectApp').service('FireQuery', ($http) => {
-  let date = 1950;
-  let agency = '';
-  this.getFires = (cb) => {
+  const defaultConfig = {
+    date: 1950,
+    srcagency: '',
+  };
+  this.getFires = (config, cb) => {
+    const currentConfig = config || defaultConfig;
     this.domain = 'http://obsessively.ca';
     this.apiString = 'computermapping/fires';
     this.url = `${this.domain}/${this.apiString}`;
     this.fullUrl = this.url;
 
-    /* If there is a valid value assigned to date, append it to the URL */
-    if (!isNaN(data)) {
-      this.fullUrl += `?date=${date}`;
-    }
-
-    if (date && agency) {
-      this.fullUrl += `&srcagency=${agency}`;
-    }
+    /* Map configuration params to querystrings and values */
+    Object.keys(defaultConfig).map((key) => {
+      if (currentConfig[key] !== null){
+        this.fullUrl += `?${key}=${currentConfig[key]}`;
+      }
+    });
+    
     $http.get(this.fullUrl, { cache: true })
         .success((data, status, headers, config) => {
           cb(data);
