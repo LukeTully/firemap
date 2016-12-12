@@ -1,5 +1,4 @@
 function aggregatePoints(dataList, renderer) {
-   /* Transform each dataItem and throw it on the map */
   return dataList.map((item) => {
      /* Transform each dataItem into a configured circleMarker */
     return getCircleMarker({
