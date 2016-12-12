@@ -54,3 +54,5 @@ bower_components
 
 # VSCode config files
 .vscode
+
+services
