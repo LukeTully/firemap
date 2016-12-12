@@ -27,6 +27,7 @@ angular.module('mapprojectApp')
           const lat = mapConfig.currentLat = newVal.latitude;
           const long = mapConfig.currentLong = newVal.longitude;
           const latLng = L.latLng(lat, long);
+          // Draw the current geolocation on the map
           L.circle(latLng, 200).addTo(mapConfig.map);
           mapConfig.map.setView(latLng);
         }, true);
@@ -38,7 +39,8 @@ angular.module('mapprojectApp')
             mapConfig.map.removeLayer(mapConfig.canvasLayer);
             mapConfig.canvasLayer = L.canvas();
           }
-          aggregatePoint(data, mapConfig, aggregateCB);
+          aggregatePoints(newVal.dataList, mapConfig.canvasLayer).addTo(mapConfig.group);
+          mapConfig.group.addTo(map);
         });
       },
     });
