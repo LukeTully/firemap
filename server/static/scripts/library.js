@@ -1,10 +1,17 @@
 
 
-
-function aggregatePoint(dataList, config, cb) {
-  loopOverArrayForPoints(dataList, config, () => {
-        cb(dataList, config);
-      });
+function aggregatePoint(dataList, config) {
+   /* Transform each dataItem and throw it on the map */
+  arr.map((item) => {
+    const mapItem = {
+      lat: item.LATITUDE,
+      long: item.LONGITUDE,
+      intensity: item.SIZE_HA,
+      last: false,
+    };
+    pushIntoPointSet(mapItem, config);
+    return mapItem;
+  });
 }
 
 function pushIntoPointSet(point, config, cb) {
@@ -24,13 +31,13 @@ function pushIntoPointSet(point, config, cb) {
           const intensity = parseInt(config.pointSet[i].intensity);
           const intensityRadius = intensity / 2;
           const markerOptions = {
-              stroke: false,
-              clickable: true,
-              fillOpacity: 1,
-              renderer: config.canvasLayer,
-              radius: intensityRadius,
-              fillColor: '#671c03',
-            };
+            stroke: false,
+            clickable: true,
+            fillOpacity: 1,
+            renderer: config.canvasLayer,
+            radius: intensityRadius,
+            fillColor: '#671c03',
+          };
                     // Colour options from lowest to highest hectares burned
 
 
@@ -69,31 +76,3 @@ function isArray(arr) {
   }
 }
 
-
-function loopOverArrayForPoints(arr, config, cb) {
-  for (let i = 0; i < arr.length; i++) {
-    if (parseInt(arr[i].LATITUDE) !== 0 && parseInt(arr[i].LONGITUDE) !== 0) {
-      if (i == arr.length - 1) {
-        pushIntoPointSet({
-          lat: arr[i].LATITUDE,
-          long: arr[i].LONGITUDE,
-          intensity: arr[i].SIZE_HA,
-          last: true,
-        }, config, (group, config) => {
-            config.map.addLayer(group);
-          });
-        cb(); // One of a few spots that doesn't need to be sent the config
-      } else {
-        pushIntoPointSet({
-          lat: arr[i].LATITUDE,
-          long: arr[i].LONGITUDE,
-          intensity: arr[i].SIZE_HA,
-          last: false,
-        }, config);
-      }
-    } else {
-      arr.splice(i, 1);
-      i -= 2;
-    }
-  }
-}
