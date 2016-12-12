@@ -23,9 +23,6 @@ angular.module('mapprojectApp').service('FireQuery', ($http) => {
     $http.get(this.fullUrl, { cache: true })
         .success((data, status, headers, requestConfig) => {
           cb(data);
-        })
-        .error((data, status, headers, requestConfig) => {
-          console.log('Request failed');
         });
   };
   this.setAgency = function (a) {
