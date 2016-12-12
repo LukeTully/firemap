@@ -12,7 +12,7 @@ function aggregatePoints(dataList, renderer) {
 }
 
 function getCircleMarker(point, renderer) {
-  const latLng = [point.lat, point.long];
+  const latLng = new L.latLng([point.lat, point.long]);
   const intensity = parseInt(point.intensity);
   const intensityRadius = intensity / 2;
   const markerOptions = {
